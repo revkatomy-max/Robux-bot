@@ -3,6 +3,7 @@ import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { connectDB } from './handlers/db.js';
 import { loadCommands } from './handlers/commandHandler.js';
 import { loadEvents } from './handlers/eventHandler.js';
+import { deployCommands } from './deploy-commands.js';
 import { logger } from './utils/logger.js';
 
 const client = new Client({
@@ -22,6 +23,7 @@ async function main() {
   connectDB(); // synchronous dengan SQLite
   await loadCommands(client);
   await loadEvents(client);
+  await deployCommands(); // auto-register slash commands tiap startup
 
   const token = process.env.DISCORD_TOKEN;
   if (!token) { logger.error('DISCORD_TOKEN tidak ditemukan!'); process.exit(1); }
