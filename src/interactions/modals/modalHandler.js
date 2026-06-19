@@ -1,4 +1,4 @@
-import { createTicket } from './buttons/buyHandler.js';
+import { createTicket } from '../buttons/buyHandler.js';
 
 export async function handleModal(interaction) {
   const { customId } = interaction;
